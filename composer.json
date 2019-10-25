@@ -9,7 +9,8 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "topthink/framework": "6.0.*|5.1.*"
+        "topthink/framework": "6.0.*|5.1.*",
+        "guzzlehttp/guzzle": "^6.4"
     },
     "autoload": {
         "psr-4": {
