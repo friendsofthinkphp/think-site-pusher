@@ -1,0 +1,19 @@
+{
+    "name": "xiaodi/think-site-pusher",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "xiaodi",
+            "email": "liangjinbiao@live.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "topthink/framework": "6.0.*|5.1.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "xiaodi\\EasyPush\\": "src/"
+        }
+    }
+}
