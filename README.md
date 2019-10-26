@@ -11,10 +11,10 @@ composer require xiaodi/think-site-pusher:dev-master
 
 ## 配置
 
-### 默认配置
+#### 默认配置
 项目根目录 `config/push.php`
 
-### 临时配置
+#### 临时配置
 ```php
 $config = ['site' => 'xxx', 'token' => 'xxx'];
 Pusher::baidu($config)->urls($urls);
