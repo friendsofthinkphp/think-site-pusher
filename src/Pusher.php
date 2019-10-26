@@ -14,9 +14,22 @@ class Pusher
 
     private $client;
 
-    public function __callStatic($name, $arguments)
+    private $namespace = "\\EasyPush\\Handles\\";
+
+    private $action = ['push', 'update', 'delete'];
+
+    public function __call($name, $arguments)
     {
-        $className = "\\EasyPush\\Handles\\{$name}";
+        if (!in_array($name, $this->action)) {
+            return $this->setHandle($name, $arguments);
+        }
+
+        return $this->exec($name, $arguments);
+    }
+
+    private function setHandle($name, $arguments)
+    {
+        $className = $this->namespace . $name;
 
         if (false === class_exists($className)) {
             throw new ClassNotFound(
@@ -39,7 +52,7 @@ class Pusher
         return $instance;
     }
 
-    public function __call($method, $argc)
+    private function exec($method, $argc)
     {
         $this->handle->setParams($method, $argc[0]);
 

@@ -13,13 +13,16 @@ composer require xiaodi/think-site-pusher:dev-master
 
 ### 临时配置
 ```php
+use EasyPush\Facade\Pusher;
+
 $config = ['site' => 'xxx', 'token' => 'xxx'];
 Pusher::baidu($config)->urls($urls);
 ```
 
 ## 使用
+#### Facade
 ```php
-use EasyPush\Pusher;
+use EasyPush\Facade\Pusher;
 
 $urls = [
   'https://www.xiaodim.com/index.html',
@@ -34,4 +37,22 @@ Pusher::baidu()->update($urls);
 
 // 删除链接
 Pusher::baidu()->delete($urls);
+
+```
+
+#### 助手函数
+```php
+$urls = [
+  'https://www.xiaodim.com/index.html',
+  'https://www.xiaodim.com/2019/10/25/thinkphp6-rpc-tutorial/'
+]
+
+// 推送链接
+app('pusher')->baidu()->push($url);
+
+// 更新链接
+app('pusher')->baidu()->update($urls);
+
+// 删除链接
+app('pusher')->baidu()->delete($urls);
 ```

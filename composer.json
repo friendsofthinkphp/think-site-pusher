@@ -16,10 +16,16 @@
     "autoload": {
         "psr-4": {
             "EasyPush\\": "src/"
-        }
+        },
+        "files": [
+            "src/helper.php"
+        ]
     },
     "extra": {
         "think": {
+            "services": [
+                "EasyPush\\PusherService"
+            ],
             "config": {
                 "push": "src/Config/push.php"
             }
