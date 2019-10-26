@@ -4,6 +4,8 @@ namespace EasyPush;
 
 use GuzzleHttp\Client;
 use EasyPush\Exception\Exception;
+use EasyPush\Exception\ClassNotFound;
+use EasyPush\Interfaces\PushInterface;
 use ReflectionClass;
 
 class Pusher
@@ -14,21 +16,22 @@ class Pusher
 
     public function __callStatic($name, $arguments)
     {
-        $handle = "\\EasyPush\\Handles\\{$name}";
+        $className = "\\EasyPush\\Handles\\{$name}";
 
-        if (false === class_exists($handle)) {
-            throw new Exception("{$handle} Not Found!");
+        if (false === class_exists($className)) {
+            throw new ClassNotFound(
+                sprintf('Class "%s" Not Found', $className)
+            );
         }
 
-        $reflectionClass = new ReflectionClass($handle);
-        $interfaces      = $reflectionClass->getInterfaceNames();
-
-        if (empty($interfaces) || !in_array('EasyPush\\Interfaces\\PushInterface', $interfaces)) {
-            throw new Exception("{$handle} 没有继承相关接口类");
+        $reflectionClass = new ReflectionClass($className);
+        $handle = $reflectionClass->newInstanceArgs($arguments);
+        if (false === $handle instanceof PushInterface) {
+            throw new Exception("{$className} is not instanceof PushInterface");
         }
 
         $instance = new static();
-        $instance->handle = new $handle($arguments);
+        $instance->handle = $handle;
         $instance->client = new Client([
             'base_uri' => $instance->handle->getUri()
         ]);
@@ -50,12 +53,9 @@ class Pusher
                 'body' => $body
             ]);
         } catch (\GuzzleHttp\Exception\RequestException $e) {
-
-        } catch (\Excpetion $e) {
-            
+            return ['code' => $e->getResponse()->getStatusCode(), 'result' => null];
         }
 
-
-        return $response->getBody()->getContents();
+        return ['code' => 200, 'result' => $response->getBody()->getContents()];
     }
 }

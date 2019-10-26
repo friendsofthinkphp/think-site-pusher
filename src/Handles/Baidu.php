@@ -2,11 +2,14 @@
 
 namespace EasyPush\Handles;
 
+use EasyPush\Exception\InvalidArgumentException;
 use EasyPush\Interfaces\PushInterface;
 
 class Baidu implements PushInterface
 {
     const URI = 'http://data.zz.baidu.com';
+
+    private $actions = ['push' => '/urls', 'update' => 'update', 'delete' => '/del'];
 
     private $query = [];
     
@@ -22,7 +25,11 @@ class Baidu implements PushInterface
         if (!empty($config)) {
             $this->config = array_merge($this->config, $config);
         } else {
-            $this->config = array_merge($this->config, config('push'));
+            $this->config = array_merge($this->config, config('push.baidu'));
+        }
+
+        if (!$this->config['site'] || !$this->config['token']) {
+            throw new InvalidArgumentException('site token配置不能为空');
         }
 
         $this->setQuery($this->config['site'], $this->config['token']);
@@ -30,7 +37,11 @@ class Baidu implements PushInterface
 
     public function setParams($method, $url)
     {
-        $this->path = "/{$method}";
+        if (!array_key_exists($method, $this->actions)) {
+            throw new InvalidArgumentException(sprintf('"%s" not allow', $method));
+        }
+
+        $this->path = $this->actions[$method];
         $this->setBody($url);
     }
 

@@ -1,6 +1,7 @@
 {
     "name": "xiaodi/think-site-pusher",
     "license": "MIT",
+    "type": "think-extend",
     "authors": [
         {
             "name": "xiaodi",
@@ -14,7 +15,17 @@
     },
     "autoload": {
         "psr-4": {
-            "xiaodi\\EasyPush\\": "src/"
+            "EasyPush\\": "src/"
+        }
+    },
+    "extra": {
+        "think": {
+            "config": {
+                "push": "src/Config/push.php"
+            }
+        },
+        "think-config": {
+            "push": "src/Config/push.php"
         }
     }
 }

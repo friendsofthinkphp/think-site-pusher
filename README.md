@@ -6,9 +6,20 @@ ThinkPHP 扩展包 网站链接提交
 composer require xiaodi/think-site-pusher:dev-master
 ```
 
+## 配置
+
+### 默认配置
+项目根目录 `config/push.php`
+
+### 临时配置
+```php
+$config = ['site' => 'xxx', 'token' => 'xxx'];
+Pusher::baidu($config)->urls($urls);
+```
+
 ## 使用
 ```php
-use xiaodi\EasyPush\Pusher;
+use EasyPush\Pusher;
 
 $urls = [
   'https://www.xiaodim.com/index.html',
@@ -16,11 +27,11 @@ $urls = [
 ]
 
 // 推送链接
-Pusher::baidu()->urls($urls);
+Pusher::baidu()->push($urls);
 
 // 更新链接
 Pusher::baidu()->update($urls);
 
 // 删除链接
-Pusher::baidu()->del($urls);
+Pusher::baidu()->delete($urls);
 ```
