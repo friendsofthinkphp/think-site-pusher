@@ -19,8 +19,8 @@ $urls = [
 Pusher::baidu()->urls($urls);
 
 // 更新链接
-Pusher::baidu()->urls($urls);
+Pusher::baidu()->update($urls);
 
 // 删除链接
-Pusher::baidu()->urls($urls);
+Pusher::baidu()->del($urls);
 ```
