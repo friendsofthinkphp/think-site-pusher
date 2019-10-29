@@ -1,5 +1,6 @@
 {
     "name": "xiaodi/think-site-pusher",
+    "description": "ThinkPHP 网站链接提交 扩展包",
     "license": "MIT",
     "type": "think-extend",
     "authors": [
@@ -7,6 +8,11 @@
             "name": "xiaodi",
             "email": "liangjinbiao@live.com"
         }
+    ],
+    "keywords": [
+        "php",
+        "thinkphp",
+        "think-extend"
     ],
     "minimum-stability": "dev",
     "require": {
