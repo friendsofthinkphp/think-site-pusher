@@ -6,7 +6,7 @@ ThinkPHP 扩展包 网站链接提交
 [![Latest Unstable Version](https://poser.pugx.org/xiaodi/think-site-pusher/v/unstable)](//packagist.org/packages/xiaodi/think-site-pusher)
 ## 安装
 ```
-composer require xiaodi/think-site-pusher:dev-master
+composer require xiaodi/think-site-pusher
 ```
 
 ## 配置
