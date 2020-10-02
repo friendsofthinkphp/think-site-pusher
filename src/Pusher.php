@@ -29,7 +29,7 @@ class Pusher
 
     private function setHandle($name, $arguments)
     {
-        $className = $this->namespace . $name;
+        $className = $this->namespace . ucwords($name);
 
         if (false === class_exists($className)) {
             throw new ClassNotFound(
